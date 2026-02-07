@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AZUNYAN | Minimal Elegant Version</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background: #fafafa;
+            color: #1a1a1a;
+            min-height: 100vh;
+        }
+        
+        /* Minimal Nav */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(250, 250, 250, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            color: #1a1a1a;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #666;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #c9a961;
+        }
+        
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            border: 1px solid #e0d5c1;
+            border-radius: 50%;
+            opacity: 0.5;
+        }
+        
+        .name-jp {
+            font-size: 0.9rem;
+            letter-spacing: 0.5em;
+            color: #999;
+            margin-bottom: 1rem;
+        }
+        
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5rem;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            margin-bottom: 1.5rem;
+            color: #1a1a1a;
+        }
+        
+        .divider {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #c9a961, transparent);
+            margin: 1.5rem auto;
+        }
+        
+        .tagline {
+            font-size: 1rem;
+            color: #888;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+        }
+        
+        /* Cards Section */
+        .section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: #c9a961;
+            margin-bottom: 4rem;
+        }
+        
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+        
+        .card {
+            text-align: center;
+            padding: 3rem 2rem;
+            border: 1px solid #eee;
+            transition: all 0.5s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            background: #fff;
+        }
+        
+        .card:hover {
+            border-color: #c9a961;
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+        }
+        
+        .card-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            color: #e8e0d0;
+            margin-bottom: 1.5rem;
+        }
+        
+        .card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+        }
+        
+        .card p {
+            font-size: 0.85rem;
+            color: #888;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 4rem 2rem;
+            border-top: 1px solid #eee;
+            color: #bbb;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 3rem; }
+            .cards { grid-template-columns: 1fr; gap: 2rem; }
+            .nav-links { gap: 1.5rem; }
+            .nav-links a { font-size: 0.75rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">AZUNYAN</a>
+        <div class="nav-links">
+            <a href="sns.html">SNS</a>
+            <a href="about.html">About</a>
+            <a href="todo.html">Goals</a>
+        </div>
+    </nav>
+    
+    <header class="hero">
+        <p class="name-jp">あずにゃん</p>
+        <h1>AZUNYAN</h1>
+        <div class="divider"></div>
+        <p class="tagline">Welcome to my world</p>
+    </header>
+    
+    <section class="section">
+        <p class="section-title">— Explore —</p>
+        <div class="cards">
+            <a href="sns.html" class="card">
+                <div class="card-num">01</div>
+                <h3>Social</h3>
+                <p>Twitter・Instagram・TikTok<br>最新情報をフォロー</p>
+            </a>
+            
+            <a href="about.html" class="card">
+                <div class="card-num">02</div>
+                <h3>Profile</h3>
+                <p>わたしについて<br>性格・スキル・趣味</p>
+            </a>
+            
+            <a href="todo.html" class="card">
+                <div class="card-num">03</div>
+                <h3>Vision</h3>
+                <p>未来への目標<br>成長の記録</p>
+            </a>
+        </div>
+    </section>
+    
+    <footer>
+        <p>© 2026 AZUNYAN — Minimal Elegant Version</p>
+    </footer>
+</body>
+</html>
