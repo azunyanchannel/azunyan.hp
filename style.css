@@ -1,0 +1,416 @@
+/* Global Variables */
+:root {
+    --bg-color: #fcfcfc;
+    --glass-bg: rgba(255, 255, 255, 0.75);
+    /* Slightly more transparent for cute vibe */
+    --nav-glass: rgba(255, 255, 255, 0.85);
+    --text-main: #4a4a4a;
+    --text-light: #666666;
+    --accent-soft: #ffe4e8;
+    --accent-pop: #ff9aa2;
+    --primary-blue: #a3d8f4;
+    /* Soft blue for links/focus */
+    --card-shadow: 0 8px 24px rgba(149, 157, 165, 0.1);
+    --card-hover-shadow: 0 12px 32px rgba(149, 157, 165, 0.2);
+    --transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    /* Bouncy cute transition */
+}
+
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    color: var(--text-main);
+    line-height: 1.8;
+    letter-spacing: 0.05em;
+    -webkit-font-smoothing: antialiased;
+    background-color: var(--bg-color);
+    position: relative;
+    min-height: 100vh;
+    padding-top: 80px;
+    /* Space for fixed header */
+}
+
+/* Background Image with Overlay */
+body::before {
+    content: '';
+    position: fixed;
+    /* Fixed so it doesn't scroll away */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('2026.jpeg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.15;
+    z-index: -2;
+    pointer-events: none;
+}
+
+/* Utility */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Global Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background: var(--nav-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+    z-index: 1000;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.03);
+}
+
+.nav-logo {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #5da7d6;
+    /* Cute blue for logo */
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.nav-logo:hover {
+    transform: scale(1.05);
+    color: var(--accent-pop);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-light);
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    position: relative;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--accent-pop);
+}
+
+/* Interactive underline for nav links */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 50%;
+    background-color: var(--accent-pop);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* Hero Section (Home) */
+header.hero {
+    padding: 6rem 0 4rem;
+    text-align: center;
+}
+
+.name {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    letter-spacing: 0.1em;
+    color: #333;
+    text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.8);
+}
+
+.tagline {
+    font-size: 1.1rem;
+    color: var(--text-main);
+    background: rgba(255, 255, 255, 0.5);
+    padding: 0.5rem 1.2rem;
+    border-radius: 50px;
+    display: inline-block;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+/* Grid for Index Cards */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+    margin-bottom: 4rem;
+}
+
+.card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(8px);
+    padding: 2.5rem;
+    border-radius: 24px;
+    /* More rounded */
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid transparent;
+    /* Prepare for border transition */
+    text-decoration: none;
+    /* For wrapping anchor tags */
+    display: block;
+    /* For wrapping anchor tags */
+    color: inherit;
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--card-hover-shadow);
+    background: rgba(255, 255, 255, 0.9);
+    border-color: var(--accent-soft);
+}
+
+.card-num {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 3.5rem;
+    color: rgba(255, 154, 162, 0.15);
+    /* Pink tint */
+    position: absolute;
+    top: 0px;
+    right: 20px;
+    font-weight: 700;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.card-content {
+    position: relative;
+    z-index: 1;
+}
+
+.card-title {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.card-desc {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    line-height: 1.7;
+}
+
+/* Page Titles (Common) */
+.page-title {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #333;
+}
+
+/* About Page Styles */
+.profile-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(8px);
+    padding: 3rem;
+    border-radius: 24px;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 4rem;
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.profile-header h2 {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 1.8rem;
+    color: var(--text-main);
+}
+
+.bio {
+    line-height: 2;
+    margin-bottom: 2rem;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.tag {
+    background: white;
+    border: 1px solid var(--accent-pop);
+    color: var(--text-main);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* SNS Page Styles */
+.sns-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 600px;
+    margin: 0 auto 4rem;
+}
+
+.sns-item {
+    background: var(--glass-bg);
+    backdrop-filter: blur(8px);
+    padding: 1.5rem 2rem;
+    border-radius: 20px;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-main);
+    border: 2px solid transparent;
+}
+
+.sns-item:hover {
+    transform: scale(1.02);
+    background: white;
+    border-color: var(--accent-pop);
+}
+
+.sns-icon {
+    font-size: 2rem;
+    margin-right: 1.5rem;
+    width: 50px;
+    text-align: center;
+}
+
+.sns-name {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.sns-id {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+/* To Do List Styles */
+.todo-list {
+    background: var(--glass-bg);
+    backdrop-filter: blur(8px);
+    padding: 2rem;
+    border-radius: 24px;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 4rem;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.todo-item:last-child {
+    border-bottom: none;
+}
+
+.checkbox {
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--accent-pop);
+    border-radius: 50%;
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.checkbox.checked {
+    background-color: var(--accent-pop);
+}
+
+.todo-text {
+    font-size: 1.1rem;
+}
+
+.checked .todo-text {
+    text-decoration: line-through;
+    color: #aaa;
+}
+
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 2rem 0;
+    color: var(--text-light);
+    font-size: 0.8rem;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(4px);
+}
+
+/* Animations */
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0 1rem;
+    }
+
+    .nav-links {
+        gap: 1rem;
+    }
+
+    .nav-links a {
+        font-size: 0.9rem;
+    }
+
+    .name {
+        font-size: 2.5rem;
+    }
+}
