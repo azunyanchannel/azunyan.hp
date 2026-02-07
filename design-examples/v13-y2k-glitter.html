@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AZUNYAN | Y2K Glitter</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background: linear-gradient(135deg, #e8f0ff 0%, #ffe8f8 50%, #f0e8ff 100%);
+            min-height: 100vh;
+            color: #6060a0;
+            overflow-x: hidden;
+        }
+        
+        /* Loading */
+        #loading {
+            position: fixed; inset: 0;
+            background: linear-gradient(135deg, #e8f0ff, #ffe8f8);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1s;
+        }
+        #loading.hide { opacity: 0; pointer-events: none; }
+        
+        .star-loader {
+            font-size: 4rem;
+            animation: sparkle-rotate 1s infinite;
+        }
+        
+        .glitter-text {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            background: linear-gradient(90deg, #ff69b4, #ba55d3, #87ceeb, #ff69b4);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer-text 2s infinite;
+        }
+        
+        @keyframes sparkle-rotate {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+        
+        @keyframes shimmer-text {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        
+        /* Floating glitter */
+        .glitter-bg {
+            position: fixed; inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .glitter {
+            position: absolute;
+            font-size: 1rem;
+            animation: float-sparkle 4s infinite;
+            opacity: 0.6;
+        }
+        
+        .glitter:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .glitter:nth-child(2) { top: 20%; right: 15%; animation-delay: 0.5s; }
+        .glitter:nth-child(3) { top: 40%; left: 20%; animation-delay: 1s; }
+        .glitter:nth-child(4) { top: 60%; right: 10%; animation-delay: 1.5s; }
+        .glitter:nth-child(5) { top: 80%; left: 15%; animation-delay: 2s; }
+        .glitter:nth-child(6) { top: 30%; left: 80%; animation-delay: 0.8s; }
+        
+        @keyframes float-sparkle {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.6; }
+            50% { transform: translateY(-15px) rotate(180deg); opacity: 1; }
+        }
+        
+        /* Content */
+        .container { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; padding: 2rem; }
+        
+        header { text-align: center; padding: 3rem 0; }
+        
+        .avatar {
+            width: 150px; height: 150px;
+            background: linear-gradient(135deg, #ffb6e8, #b6d4ff, #d4b6ff);
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            border: 4px solid #fff;
+            box-shadow: 
+                0 0 30px rgba(255, 150, 200, 0.4),
+                0 0 60px rgba(150, 200, 255, 0.2);
+            animation: glow-pulse 2s infinite;
+        }
+        
+        @keyframes glow-pulse {
+            0%, 100% { box-shadow: 0 0 30px rgba(255, 150, 200, 0.4), 0 0 60px rgba(150, 200, 255, 0.2); }
+            50% { box-shadow: 0 0 50px rgba(255, 150, 200, 0.6), 0 0 80px rgba(150, 200, 255, 0.4); }
+        }
+        
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #ff69b4, #ba55d3, #87ceeb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255, 105, 180, 0.3);
+        }
+        
+        .tagline {
+            color: #9090c0;
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+        }
+        
+        /* Star divider */
+        .star-divider {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            font-size: 1.5rem;
+        }
+        
+        .star-divider span { animation: twinkle 1s infinite; }
+        .star-divider span:nth-child(2) { animation-delay: 0.2s; }
+        .star-divider span:nth-child(3) { animation-delay: 0.4s; }
+        .star-divider span:nth-child(4) { animation-delay: 0.6s; }
+        .star-divider span:nth-child(5) { animation-delay: 0.8s; }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+        
+        /* Glitter cards */
+        .glitter-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .glitter-card {
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .glitter-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,182,232,0.2), rgba(182,212,255,0.2));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .glitter-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 150, 200, 0.5);
+            box-shadow: 0 15px 40px rgba(200, 150, 255, 0.25);
+        }
+        
+        .glitter-card:hover::before { opacity: 1; }
+        
+        .card-icon { font-size: 2.5rem; margin-bottom: 1rem; position: relative; z-index: 1; }
+        .glitter-card h3 { color: #8080b0; font-size: 1.1rem; margin-bottom: 0.3rem; position: relative; z-index: 1; }
+        .glitter-card p { color: #a0a0c0; font-size: 0.8rem; position: relative; z-index: 1; }
+        
+        /* Status bubbles */
+        .status-bubbles {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .bubble {
+            background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(255,230,250,0.8));
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: #8080b0;
+            box-shadow: 0 5px 15px rgba(200, 150, 255, 0.15);
+        }
+        
+        /* Message */
+        .sparkle-message {
+            background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(240,230,255,0.8));
+            border-radius: 25px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        .sparkle-message::before,
+        .sparkle-message::after {
+            content: '✨';
+            position: absolute;
+            font-size: 1.5rem;
+        }
+        .sparkle-message::before { top: 1rem; left: 1.5rem; }
+        .sparkle-message::after { bottom: 1rem; right: 1.5rem; }
+        
+        .sparkle-message p {
+            font-size: 1.1rem;
+            color: #7070a0;
+            line-height: 1.8;
+        }
+        
+        footer { text-align: center; padding: 3rem; color: #b0b0d0; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+    <div id="loading">
+        <div class="star-loader">⭐</div>
+        <div class="glitter-text">✨ Loading... ✨</div>
+    </div>
+    
+    <div class="glitter-bg">
+        <div class="glitter">✦</div>
+        <div class="glitter">✧</div>
+        <div class="glitter">✦</div>
+        <div class="glitter">✧</div>
+        <div class="glitter">✦</div>
+        <div class="glitter">✧</div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <div class="avatar">🐰</div>
+            <h1>AZUNYAN</h1>
+            <p class="tagline">✨ キラキラ輝く毎日を ✨</p>
+        </header>
+        
+        <div class="star-divider">
+            <span>⭐</span><span>✨</span><span>💫</span><span>✨</span><span>⭐</span>
+        </div>
+        
+        <div class="status-bubbles">
+            <span class="bubble">💖 Dreamer</span>
+            <span class="bubble">✨ Creator</span>
+            <span class="bubble">🌈 Positive</span>
+        </div>
+        
+        <div class="sparkle-message">
+            <p>
+                キラキラした日々を、あなたと一緒に 💫<br>
+                夢を追いかけて、輝き続けよう ✨
+            </p>
+        </div>
+        
+        <div class="glitter-cards">
+            <a href="sns.html" class="glitter-card">
+                <div class="card-icon">📱</div>
+                <h3>SNS</h3>
+                <p>Follow ✨</p>
+            </a>
+            <a href="about.html" class="glitter-card">
+                <div class="card-icon">💖</div>
+                <h3>About</h3>
+                <p>Profile 💫</p>
+            </a>
+            <a href="todo.html" class="glitter-card">
+                <div class="card-icon">⭐</div>
+                <h3>Goals</h3>
+                <p>Dreams 🌈</p>
+            </a>
+        </div>
+        
+        <footer>© 2026 AZUNYAN — Y2K Glitter Version ✨</footer>
+    </div>
+    
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => document.getElementById('loading').classList.add('hide'), 1500);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AZUNYAN | Ribbon & Bow</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background: linear-gradient(180deg, #fff8fa 0%, #fff0f5 100%);
+            min-height: 100vh;
+            color: #8b6080;
+        }
+        
+        /* Loading */
+        #loading {
+            position: fixed; inset: 0;
+            background: linear-gradient(135deg, #fff8fa, #ffe8f0);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1s;
+        }
+        #loading.hide { opacity: 0; pointer-events: none; }
+        
+        .bow-loader {
+            font-size: 5rem;
+            animation: wobble 1s infinite;
+        }
+        
+        .ribbon-line {
+            width: 200px; height: 3px;
+            background: linear-gradient(90deg, transparent, #ffb6c1, transparent);
+            margin-top: 1rem;
+            animation: shimmer 1.5s infinite;
+        }
+        
+        @keyframes wobble {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        
+        /* Ribbon decorations */
+        .ribbon-decor {
+            position: fixed;
+            font-size: 3rem;
+            opacity: 0.15;
+            z-index: 0;
+        }
+        .ribbon-decor:nth-child(1) { top: 10%; left: 5%; }
+        .ribbon-decor:nth-child(2) { top: 30%; right: 8%; }
+        .ribbon-decor:nth-child(3) { bottom: 25%; left: 8%; }
+        .ribbon-decor:nth-child(4) { bottom: 10%; right: 5%; }
+        
+        /* Content */
+        .container { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; padding: 2rem; }
+        
+        header { text-align: center; padding: 3rem 0; }
+        
+        .avatar-frame {
+            display: inline-block;
+            position: relative;
+        }
+        
+        .avatar {
+            width: 140px; height: 140px;
+            background: linear-gradient(135deg, #ffd1dc, #ffb6c1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            border: 5px solid #fff;
+            box-shadow: 0 10px 40px rgba(255, 150, 180, 0.3);
+        }
+        
+        .top-bow {
+            position: absolute;
+            top: -20px; left: 50%;
+            transform: translateX(-50%);
+            font-size: 2.5rem;
+        }
+        
+        h1 { font-size: 2.8rem; color: #d4728c; margin: 1.5rem 0 0.5rem; }
+        
+        .ribbon-title {
+            display: inline-block;
+            background: linear-gradient(90deg, transparent, #ffb6c1, transparent);
+            padding: 0.3rem 2rem;
+            color: #8b6080;
+            font-size: 0.9rem;
+        }
+        
+        /* Present boxes */
+        .present-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        
+        .present-box {
+            background: #fff;
+            border-radius: 15px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        
+        .present-box::before {
+            content: '🎀';
+            position: absolute;
+            top: -12px; left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+        }
+        
+        .present-box::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 3px; height: 100%;
+            background: linear-gradient(180deg, #ffb6c1, transparent);
+            opacity: 0.3;
+        }
+        
+        .present-box:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(255, 150, 180, 0.25);
+        }
+        
+        .present-icon { font-size: 2.5rem; margin-bottom: 1rem; position: relative; z-index: 1; }
+        .present-box h3 { color: #d4728c; font-size: 1.1rem; margin-bottom: 0.3rem; }
+        .present-box p { color: #b8899a; font-size: 0.8rem; }
+        
+        /* Message card */
+        .message-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+        }
+        
+        .message-card::before {
+            content: '💌';
+            position: absolute;
+            top: -15px; left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+        }
+        
+        .message-card p {
+            font-size: 1.1rem;
+            color: #8b6080;
+            line-height: 1.8;
+        }
+        
+        /* Hearts float */
+        .hearts {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .hearts span {
+            font-size: 1.5rem;
+            animation: float-heart 2s infinite;
+        }
+        .hearts span:nth-child(2) { animation-delay: 0.3s; }
+        .hearts span:nth-child(3) { animation-delay: 0.6s; }
+        
+        @keyframes float-heart {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* Social ribbon */
+        .social-ribbon {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .social-btn {
+            width: 50px; height: 50px;
+            background: linear-gradient(135deg, #ffd1dc, #ffb6c1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 150, 180, 0.3);
+        }
+        
+        .social-btn:hover {
+            transform: scale(1.15);
+        }
+        
+        footer { text-align: center; padding: 3rem; color: #d4a8b8; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+    <div id="loading">
+        <div class="bow-loader">🎀</div>
+        <div class="ribbon-line"></div>
+    </div>
+    
+    <div class="ribbon-decor">🎀</div>
+    <div class="ribbon-decor">🎀</div>
+    <div class="ribbon-decor">🎀</div>
+    <div class="ribbon-decor">🎀</div>
+    
+    <div class="container">
+        <header>
+            <div class="avatar-frame">
+                <span class="top-bow">🎀</span>
+                <div class="avatar">🐰</div>
+            </div>
+            <h1>AZUNYAN</h1>
+            <div class="ribbon-title">✨ Welcome to my world ✨</div>
+        </header>
+        
+        <div class="hearts">
+            <span>💕</span><span>💖</span><span>💕</span>
+        </div>
+        
+        <div class="message-card">
+            <p>
+                いつも応援ありがとう 🎀<br>
+                あなたに会えて嬉しいです ♡
+            </p>
+        </div>
+        
+        <div class="present-grid">
+            <a href="sns.html" class="present-box">
+                <div class="present-icon">📱</div>
+                <h3>SNS</h3>
+                <p>Connect with me</p>
+            </a>
+            <a href="about.html" class="present-box">
+                <div class="present-icon">👑</div>
+                <h3>About Me</h3>
+                <p>Know me better</p>
+            </a>
+            <a href="todo.html" class="present-box">
+                <div class="present-icon">✨</div>
+                <h3>Goals</h3>
+                <p>My dreams</p>
+            </a>
+        </div>
+        
+        <div class="social-ribbon">
+            <a href="#" class="social-btn">🐦</a>
+            <a href="#" class="social-btn">📷</a>
+            <a href="#" class="social-btn">🎵</a>
+        </div>
+        
+        <footer>© 2026 AZUNYAN — Ribbon & Bow Version 🎀</footer>
+    </div>
+    
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => document.getElementById('loading').classList.add('hide'), 1500);
+        });
+    </script>
+</body>
+</html>

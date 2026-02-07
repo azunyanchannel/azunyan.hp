@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AZUNYAN | Magazine Style</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Zen+Maru+Gothic:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background: #fafafa;
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        /* Loading */
+        #loading {
+            position: fixed; inset: 0;
+            background: #fafafa;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1s;
+        }
+        #loading.hide { opacity: 0; pointer-events: none; }
+        
+        .mag-loader {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            color: #333;
+            animation: fade-in-out 1.5s infinite;
+        }
+        
+        .loading-line {
+            width: 100px; height: 2px;
+            background: #333;
+            margin-top: 1rem;
+            animation: expand 1.5s infinite;
+        }
+        
+        @keyframes fade-in-out {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        @keyframes expand {
+            0%, 100% { transform: scaleX(0.3); }
+            50% { transform: scaleX(1); }
+        }
+        
+        /* Content */
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+        
+        /* Magazine Header */
+        .mag-header {
+            text-align: center;
+            padding: 3rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .mag-date {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            color: #999;
+            margin-bottom: 1rem;
+        }
+        
+        .mag-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            color: #333;
+        }
+        
+        .mag-tagline {
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: 0.5rem;
+            font-weight: 300;
+        }
+        
+        /* Cover Story */
+        .cover-story {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            padding: 3rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cover-image {
+            aspect-ratio: 3/4;
+            background: linear-gradient(135deg, #f8e8e8, #e8e0e8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+        }
+        
+        .cover-text { display: flex; flex-direction: column; justify-content: center; }
+        
+        .cover-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            color: #c9a;
+            margin-bottom: 1rem;
+        }
+        
+        .cover-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+        
+        .cover-excerpt {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+        
+        .read-more {
+            display: inline-block;
+            margin-top: 1.5rem;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            color: #333;
+            text-decoration: none;
+            border-bottom: 1px solid #333;
+            padding-bottom: 2px;
+        }
+        
+        /* Featured Grid */
+        .featured-section {
+            padding: 3rem 0;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.3em;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #999;
+        }
+        
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .featured-item {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .featured-img {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #f0e8e8, #e8e4f0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            transition: transform 0.3s;
+        }
+        
+        .featured-item:hover .featured-img { transform: scale(1.03); }
+        
+        .featured-cat {
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            color: #c9a;
+        }
+        
+        .featured-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin: 0.5rem 0;
+        }
+        
+        .featured-desc {
+            font-size: 0.8rem;
+            color: #888;
+            font-weight: 300;
+        }
+        
+        /* Quote */
+        .mag-quote {
+            text-align: center;
+            padding: 3rem;
+            background: #f8f8f8;
+            margin: 2rem 0;
+        }
+        
+        .mag-quote p {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .mag-quote span {
+            display: block;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: #999;
+            font-family: 'Zen Maru Gothic', sans-serif;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem;
+            border-top: 1px solid #eee;
+            color: #999;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+        }
+        
+        @media (max-width: 768px) {
+            .cover-story { grid-template-columns: 1fr; }
+            .featured-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div id="loading">
+        <div class="mag-loader">AZUNYAN</div>
+        <div class="loading-line"></div>
+    </div>
+    
+    <div class="container">
+        <header class="mag-header">
+            <p class="mag-date">FEBRUARY 2026 • VOL.01</p>
+            <h1 class="mag-logo">AZUNYAN</h1>
+            <p class="mag-tagline">Life, Style & Dreams</p>
+        </header>
+        
+        <section class="cover-story">
+            <div class="cover-image">🐰</div>
+            <div class="cover-text">
+                <span class="cover-label">COVER STORY</span>
+                <h2 class="cover-title">夢を追いかけて</h2>
+                <p class="cover-excerpt">
+                    自分らしく生きること。<br>
+                    毎日を大切に、一歩ずつ前に進む。<br>
+                    私の物語は、まだ始まったばかり。
+                </p>
+                <a href="about.html" class="read-more">READ MORE →</a>
+            </div>
+        </section>
+        
+        <section class="featured-section">
+            <h3 class="section-title">— IN THIS ISSUE —</h3>
+            <div class="featured-grid">
+                <a href="sns.html" class="featured-item">
+                    <div class="featured-img">📱</div>
+                    <span class="featured-cat">SOCIAL</span>
+                    <h4 class="featured-title">Connect</h4>
+                    <p class="featured-desc">Follow my journey on social media</p>
+                </a>
+                <a href="about.html" class="featured-item">
+                    <div class="featured-img">🎀</div>
+                    <span class="featured-cat">PROFILE</span>
+                    <h4 class="featured-title">About Me</h4>
+                    <p class="featured-desc">Get to know the real me</p>
+                </a>
+                <a href="todo.html" class="featured-item">
+                    <div class="featured-img">✨</div>
+                    <span class="featured-cat">LIFESTYLE</span>
+                    <h4 class="featured-title">Goals</h4>
+                    <p class="featured-desc">Dreams I want to achieve</p>
+                </a>
+            </div>
+        </section>
+        
+        <div class="mag-quote">
+            <p>「小さな幸せを、大切に」</p>
+            <span>— AZUNYAN</span>
+        </div>
+        
+        <footer>© 2026 AZUNYAN MAGAZINE — ALL RIGHTS RESERVED</footer>
+    </div>
+    
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => document.getElementById('loading').classList.add('hide'), 1500);
+        });
+    </script>
+</body>
+</html>

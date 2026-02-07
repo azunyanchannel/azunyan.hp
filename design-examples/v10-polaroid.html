@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AZUNYAN | Polaroid</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Zen+Maru+Gothic:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background: #f5f0e8;
+            min-height: 100vh;
+            color: #5a5045;
+        }
+        
+        /* Loading */
+        #loading {
+            position: fixed; inset: 0;
+            background: #f5f0e8;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1s;
+        }
+        #loading.hide { opacity: 0; pointer-events: none; }
+        
+        .camera-loader {
+            font-size: 4rem;
+            animation: flash 1.5s infinite;
+        }
+        
+        .film-strip {
+            display: flex;
+            gap: 0.3rem;
+            margin-top: 1rem;
+        }
+        
+        .film-strip span {
+            width: 30px; height: 35px;
+            background: #fff;
+            border: 2px solid #ddd;
+            animation: develop 2s infinite;
+        }
+        .film-strip span:nth-child(2) { animation-delay: 0.3s; }
+        .film-strip span:nth-child(3) { animation-delay: 0.6s; }
+        
+        @keyframes flash {
+            0%, 90%, 100% { filter: brightness(1); }
+            95% { filter: brightness(1.5); }
+        }
+        
+        @keyframes develop {
+            0%, 50% { background: #fff; }
+            100% { background: #e8e0d5; }
+        }
+        
+        /* Cork board texture */
+        .corkboard {
+            position: fixed; inset: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(180, 140, 100, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(180, 140, 100, 0.1) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        /* Content */
+        .container { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 2rem; }
+        
+        header { text-align: center; padding: 2rem 0; }
+        
+        /* Main polaroid */
+        .main-polaroid {
+            display: inline-block;
+            background: #fff;
+            padding: 15px 15px 50px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transform: rotate(-3deg);
+            margin-bottom: 1rem;
+        }
+        
+        .polaroid-img {
+            width: 150px; height: 150px;
+            background: linear-gradient(135deg, #ffe4e0, #e8d4d0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+        
+        .polaroid-caption {
+            font-family: 'Caveat', cursive;
+            font-size: 1.5rem;
+            color: #6b5b50;
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+        
+        h1 { font-size: 2.5rem; color: #6b5b50; margin: 1rem 0 0.3rem; }
+        .tagline { color: #8b7b70; font-size: 0.9rem; }
+        
+        /* Polaroid gallery */
+        .polaroid-gallery {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .mini-polaroid {
+            background: #fff;
+            padding: 8px 8px 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        
+        .mini-polaroid:nth-child(1) { transform: rotate(-5deg); }
+        .mini-polaroid:nth-child(2) { transform: rotate(3deg); }
+        .mini-polaroid:nth-child(3) { transform: rotate(-2deg); }
+        .mini-polaroid:nth-child(4) { transform: rotate(4deg); }
+        
+        .mini-polaroid:hover { transform: rotate(0) scale(1.1); z-index: 10; }
+        
+        .mini-img {
+            width: 80px; height: 80px;
+            background: linear-gradient(135deg, #f5e8e0, #e8dcd5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+        
+        .mini-caption {
+            font-family: 'Caveat', cursive;
+            font-size: 0.9rem;
+            color: #8b7b70;
+            text-align: center;
+            margin-top: 5px;
+        }
+        
+        /* Tape decoration */
+        .tape {
+            display: inline-block;
+            background: rgba(255, 235, 180, 0.7);
+            padding: 0.3rem 1rem;
+            transform: rotate(-2deg);
+            font-size: 0.8rem;
+            color: #8b7b70;
+            margin: 0.5rem;
+        }
+        
+        /* Note cards */
+        .note-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .note-card {
+            background: #fffef5;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .note-card::before {
+            content: '';
+            position: absolute;
+            top: -5px; left: 50%;
+            transform: translateX(-50%);
+            width: 40px; height: 15px;
+            background: rgba(255, 235, 180, 0.8);
+        }
+        
+        .note-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .note-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+        .note-card h3 { color: #6b5b50; font-size: 1.1rem; margin-bottom: 0.3rem; }
+        .note-card p { color: #8b7b70; font-size: 0.8rem; }
+        
+        /* Handwritten list */
+        .todo-preview {
+            background: #fff;
+            padding: 1.5rem;
+            margin: 2rem auto;
+            max-width: 300px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transform: rotate(1deg);
+        }
+        
+        .todo-preview h4 {
+            font-family: 'Caveat', cursive;
+            font-size: 1.3rem;
+            color: #6b5b50;
+            margin-bottom: 0.8rem;
+            border-bottom: 1px dashed #ddd;
+            padding-bottom: 0.5rem;
+        }
+        
+        .todo-preview li {
+            font-family: 'Caveat', cursive;
+            font-size: 1.1rem;
+            color: #8b7b70;
+            list-style: none;
+            padding: 0.3rem 0;
+        }
+        
+        .todo-preview li::before { content: '☐ '; }
+        
+        footer { text-align: center; padding: 3rem; color: #b5a595; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+    <div id="loading">
+        <div class="camera-loader">📷</div>
+        <div class="film-strip">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+    
+    <div class="corkboard"></div>
+    
+    <div class="container">
+        <header>
+            <div class="main-polaroid">
+                <div class="polaroid-img">🐰</div>
+                <div class="polaroid-caption">me ♡</div>
+            </div>
+            <h1>AZUNYAN</h1>
+            <p class="tagline">📷 思い出を、形に残して</p>
+        </header>
+        
+        <div style="text-align: center;">
+            <span class="tape">✨ My Memories ✨</span>
+        </div>
+        
+        <div class="polaroid-gallery">
+            <div class="mini-polaroid">
+                <div class="mini-img">🌸</div>
+                <div class="mini-caption">spring</div>
+            </div>
+            <div class="mini-polaroid">
+                <div class="mini-img">☕</div>
+                <div class="mini-caption">cafe</div>
+            </div>
+            <div class="mini-polaroid">
+                <div class="mini-img">🎵</div>
+                <div class="mini-caption">music</div>
+            </div>
+            <div class="mini-polaroid">
+                <div class="mini-img">🌙</div>
+                <div class="mini-caption">night</div>
+            </div>
+        </div>
+        
+        <div class="note-cards">
+            <a href="sns.html" class="note-card">
+                <div class="note-icon">📱</div>
+                <h3>SNS</h3>
+                <p>Follow my journey</p>
+            </a>
+            <a href="about.html" class="note-card">
+                <div class="note-icon">🎀</div>
+                <h3>About Me</h3>
+                <p>Get to know me</p>
+            </a>
+            <a href="todo.html" class="note-card">
+                <div class="note-icon">✨</div>
+                <h3>Bucket List</h3>
+                <p>Dreams to achieve</p>
+            </a>
+        </div>
+        
+        <div class="todo-preview">
+            <h4>✏️ Bucket List</h4>
+            <ul>
+                <li>海外旅行に行く</li>
+                <li>写真集を出す</li>
+                <li>100人のファン達成</li>
+            </ul>
+        </div>
+        
+        <footer>© 2026 AZUNYAN — Polaroid Version 📷</footer>
+    </div>
+    
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => document.getElementById('loading').classList.add('hide'), 1800);
+        });
+    </script>
+</body>
+</html>
