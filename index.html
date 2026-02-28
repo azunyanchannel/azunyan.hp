@@ -9,104 +9,120 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Zen+Maru+Gothic:wght@500;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Zen+Maru+Gothic:wght@400;500;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-
-    <!-- Loading Screen -->
-    <div id="loading-screen">
-        <div class="loading-content">
-            <h1 class="welcome-text">Welcome to Azunyan World</h1>
-            <div class="loading-bar-container">
-                <div class="rabbit-bar"></div>
-                <div class="rabbit">🐇</div>
-            </div>
-            <p class="loading-text">Loading...</p>
+    <!-- Loading Screen (Wanghong Pink & White) -->
+    <div id="loading">
+        <div class="loading-photo-container">
+            <img src="loading-photo.jpg" alt="Loading Avatar" class="loading-photo">
+            <div class="loading-ring"></div>
+        </div>
+        <div class="loading-text">Welcome to Azunyan World 🎀</div>
+        <div class="stars-loading">
+            <span>🌸</span> <span>✨</span> <span>🤍</span>
         </div>
     </div>
 
+    <!-- Floating Clouds (v5 Dreamy Cloud) -->
+    <div class="clouds">
+        <div class="cloud">☁️</div>
+        <div class="cloud">☁️</div>
+        <div class="cloud">☁️</div>
+    </div>
 
-    <nav class="navbar">
-        <a href="index.html" class="nav-logo">Azunyan.me</a>
-        <div class="nav-links">
-            <a href="sns.html">SNS</a>
-            <a href="about.html">About Me</a>
-            <a href="todo.html">To Do List</a>
+    <div class="container">
+        <!-- Header (v7 layout + v5 clouds) -->
+        <header>
+            <div class="avatar-cloud">
+                <div class="avatar">🐰</div>
+                <div class="floating-icons">
+                    <span>⭐</span>
+                    <span>💫</span>
+                    <span>🌙</span>
+                </div>
+            </div>
+            <h1>AZUNYAN</h1>
+            <p class="tagline">☁️ ゆめかわワールドへようこそ ☁️</p>
+        </header>
+
+        <!-- Menu Bar (v7 layout) -->
+        <nav class="menu-bar">
+            <a href="index.html" class="menu-btn active">Home</a>
+            <a href="sns.html" class="menu-btn">SNS</a>
+            <a href="about.html" class="menu-btn">About</a>
+            <a href="todo.html" class="menu-btn">Goals</a>
+        </nav>
+
+        <!-- Today's Pick (v7 structure) -->
+        <div class="today-pick">
+            <div class="pick-icon">🌸</div>
+            <div class="pick-text">
+                <h4>Today's Mood</h4>
+                <p>ふわふわな気持ちで、今日も一日がんばろう ✨</p>
+            </div>
         </div>
-    </nav>
 
-    <header class="container hero">
-        <span
-            style="font-size: 3rem; display: block; margin-bottom: 1rem; animation: float 3s infinite ease-in-out;">💐</span>
-        <h1 class="name">AZUNYAN</h1>
-        <p class="tagline">あずにゃんのお花畑世界へようこそ 🤍</p>
-    </header>
+        <!-- Featured Section (v7 structure) -->
+        <div class="featured">
+            <div class="featured-header">
+                <div class="featured-icon">🎀</div>
+                <div>
+                    <h3 class="featured-title">My Favorites</h3>
+                    <p class="featured-sub">好きなもの</p>
+                </div>
+            </div>
+            <div class="featured-content">
+                <div class="featured-item"><span>🐰</span>
+                    <p>Rabbits</p>
+                </div>
+                <div class="featured-item"><span>📖</span>
+                    <p>Reading</p>
+                </div>
+                <div class="featured-item"><span>🎵</span>
+                    <p>Music</p>
+                </div>
+                <div class="featured-item"><span>☕</span>
+                    <p>Cafe Time</p>
+                </div>
+            </div>
+        </div>
 
-    <main class="container">
-        <div class="grid">
-            <!-- Card 01: SNS -->
+        <!-- Cards Grid (v7 structure) -->
+        <div class="cards">
             <a href="sns.html" class="card">
-                <span class="card-num">01</span>
-                <div class="card-content">
-                    <h3 class="card-title">📱 SNS</h3>
-                    <p class="card-desc">
-                        Twitter / Instagram / TikTok<br>
-                        私の日常や最新情報をチェック！
-                    </p>
-                </div>
+                <div class="card-icon">📱</div>
+                <h3>SNS</h3>
+                <p>Follow me</p>
             </a>
-
-            <!-- Card 02: About Me -->
             <a href="about.html" class="card">
-                <span class="card-num">02</span>
-                <div class="card-content">
-                    <h3 class="card-title">🎀 About Me</h3>
-                    <p class="card-desc">
-                        あずにゃん（梓）について。<br>
-                        性格、スキル、好きなものなど。
-                    </p>
-                </div>
+                <div class="card-icon">🎀</div>
+                <h3>About Me</h3>
+                <p>Profile</p>
             </a>
-
-            <!-- Card 03: To Do List -->
             <a href="todo.html" class="card">
-                <span class="card-num">03</span>
-                <div class="card-content">
-                    <h3 class="card-title">✨ To Do List</h3>
-                    <p class="card-desc">
-                        未来への目標リスト。<br>
-                        これからの成長の記録です。
-                    </p>
-                </div>
+                <div class="card-icon">✨</div>
+                <h3>Dreams</h3>
+                <p>Goals</p>
             </a>
         </div>
-    </main>
 
-    <footer>
-        <p>&copy; 2026 AZUNYAN Profile. All Rights Reserved.</p>
-    </footer>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        <footer>© 2026 AZUNYAN — Dreamy Version ☁️</footer>
+    </div>
 
     <script src="script.js"></script>
-
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loading = document.getElementById('loading');
+                if (loading) loading.classList.add('hide');
+            }, 2500); // Increased time to enjoy the animation
+        });
+    </script>
 </body>
 
 </html>

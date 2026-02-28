@@ -8,50 +8,105 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Zen+Maru+Gothic:wght@500;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Zen+Maru+Gothic:wght@400;500;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <nav class="navbar">
-        <a href="index.html" class="nav-logo">Azunyan.me</a>
-        <div class="nav-links">
-            <a href="sns.html" style="color: var(--accent-pop);">SNS</a>
-            <a href="about.html">About Me</a>
-            <a href="todo.html">To Do List</a>
+    <!-- Loading Screen (v8 Lavender Dream) -->
+    <div id="loading">
+        <div class="moon-loader">🌙</div>
+        <div class="stars-loading">
+            <span>✨</span> <span>⭐</span> <span>✨</span>
         </div>
-    </nav>
+    </div>
 
-    <main class="container">
-        <h1 class="page-title">SNS Accounts 📱</h1>
+    <!-- Floating Clouds (v5 Dreamy Cloud) -->
+    <div class="clouds">
+        <div class="cloud">☁️</div>
+        <div class="cloud">☁️</div>
+        <div class="cloud">☁️</div>
+    </div>
+
+    <div class="container">
+        <!-- Menu Bar -->
+        <nav class="menu-bar">
+            <a href="index.html" class="menu-btn">Home</a>
+            <a href="sns.html" class="menu-btn active">SNS</a>
+            <a href="about.html" class="menu-btn">About</a>
+            <a href="todo.html" class="menu-btn">Goals</a>
+        </nav>
+
+        <div class="page-header">
+            <h1 class="page-title">My SNS</h1>
+            <p class="page-desc">いろんなSNSで発信中！ぜひフォローしてね🎀</p>
+        </div>
 
         <div class="sns-list">
-            <a href="#" class="sns-item">
-                <span class="sns-icon">🕊️</span>
-                <div>
-                    <div class="sns-name">Twitter (X)</div>
-                    <div class="sns-id">@azunyan_sample</div>
-                </div>
-            </a>
-            <a href="#" class="sns-item">
-                <span class="sns-icon">📸</span>
+            <a href="https://www.instagram.com/may_azusa?igsh=MXl5ZWZpb2JrcG04&utm_source=qr" target="_blank"
+                class="sns-item">
+                <span class="sns-item-icon">📸</span>
                 <div>
                     <div class="sns-name">Instagram</div>
-                    <div class="sns-id">@azunyan_gram</div>
+                    <div class="sns-id">@may_azusa</div>
                 </div>
             </a>
-            <a href="#" class="sns-item">
-                <span class="sns-icon">🎵</span>
+
+            <a href="https://x.com/may_azusa?s=21" target="_blank" class="sns-item">
+                <span class="sns-item-icon">🕊️</span>
+                <div>
+                    <div class="sns-name">X (Twitter)</div>
+                    <div class="sns-id">@may_azusa</div>
+                </div>
+            </a>
+
+            <a href="https://www.tiktok.com/@may_azusa" target="_blank" class="sns-item">
+                <span class="sns-item-icon">🎵</span>
                 <div>
                     <div class="sns-name">TikTok</div>
-                    <div class="sns-id">@azunyan_dance</div>
+                    <div class="sns-id">@may_azusa</div>
+                </div>
+            </a>
+
+            <a href="https://youtube.com/@may_azusa?si=n4KhMzR_St5mimlI" target="_blank" class="sns-item">
+                <span class="sns-item-icon">▶️</span>
+                <div>
+                    <div class="sns-name">YouTube</div>
+                    <div class="sns-id">@may_azusa</div>
+                </div>
+            </a>
+
+            <a href="https://xhslink.com/m/1PNcbzYXw31" target="_blank" class="sns-item">
+                <span class="sns-item-icon">📕</span>
+                <div>
+                    <div class="sns-name">小红书 (Xiaohongshu)</div>
+                    <div class="sns-id">I got 229 likes & cols...</div>
+                </div>
+            </a>
+
+            <a href="https://b23.tv/Tg9pCMG" target="_blank" class="sns-item">
+                <span class="sns-item-icon">📺</span>
+                <div>
+                    <div class="sns-name">bilibili</div>
+                    <div class="sns-id">木辛悅的个人空间</div>
                 </div>
             </a>
         </div>
-    </main>
 
+        <footer>© 2026 AZUNYAN — Dreamy Version ☁️</footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loading = document.getElementById('loading');
+                if (loading) loading.classList.add('hide');
+            }, 800); // Shorter loading for inner pages
+        });
+    </script>
 </body>
 
 </html>
